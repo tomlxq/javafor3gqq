@@ -1,4 +1,4 @@
-package com.mc.test;
+package com.mc.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,8 +15,7 @@ import java.util.Set;
 
 
 /**
- * 网络工具类。<br>
- * 	执行GET和POST请求等等。
+ * 缃戠粶杩炴帴搴曞眰绫伙紝鎵цget鍜宲ost璇锋眰
  * @author Shine_MuShi
  *
  */
@@ -33,10 +32,9 @@ public abstract class WebUtils {
 	}
 	
 	/**
-	 * 执行HTTP POST请求。
-	 * @param url 请求地址
-	 * @param params 请求参数
-	 * @return 响应字符串
+	 * @parma址
+	 * @param params
+	 * @return
 	 * @throws IOException
 	 */
 	public static String doPost(String url, Map<String, String> params,int connectTimeout,int readTimeout) throws IOException {
@@ -48,14 +46,6 @@ public abstract class WebUtils {
 		return doPost(url, CTYPE, content, connectTimeout, readTimeout);
 	}
 
-	/**
-	 * 执行HTTP POST请求。
-	 * @param url 请求地址
-	 * @param ctype 请求类型
-	 * @param content 请求字节数组
-	 * @return 响应字符串
-	 * @throws IOException
-	 */
 	public static String doPost(String url, String ctype, byte[] content,int connectTimeout,int readTimeout) throws IOException {
 		HttpURLConnection conn = null;
 		OutputStream out = null;
@@ -87,26 +77,10 @@ public abstract class WebUtils {
 		return rsp;
 	}
 	
-	/**
-	 * 执行HTTP GET请求。
-	 * @param url 请求地址
-	 * @param params 请求参数
-	 * @return 响应字符串
-	 * @throws IOException
-	 */
 	public static String doGet(String url) throws IOException {
 		return doGet(url, DEFAULT_CHARSET);
 	}
 
-	/**
-	 * 执行HTTP GET请求。
-	 * 
-	 * @param url 请求地址
-	 * @param params 请求参数
-	 * @param charset 字符集，如UTF-8, GBK, GB2312
-	 * @return 响应字符串
-	 * @throws IOException
-	 */
 	public static String doGet(String url, String charset)
 			throws IOException {
 		HttpURLConnection conn = null;
@@ -130,14 +104,6 @@ public abstract class WebUtils {
 		return rsp;
 	}
 	
-	/**
-	 * 获取http连接
-	 * @param url
-	 * @param action
-	 * @param ctype
-	 * @return
-	 * @throws IOException
-	 */
 	private static HttpURLConnection getConnection(URL url, String action, String ctype)
 			throws IOException {
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -150,12 +116,6 @@ public abstract class WebUtils {
 		return conn;
 	}
 	
-	/**
-	 * 把响应流转换为字符串
-	 * @param conn
-	 * @return
-	 * @throws IOException
-	 */
 	private static String getResponseAsString(HttpURLConnection conn) throws IOException {
 		String charset = getResponseCharset(conn.getContentType());
 		InputStream es = conn.getErrorStream();
@@ -166,7 +126,7 @@ public abstract class WebUtils {
 	}
 	
 	/**
-	 * 把响应流转换为字符串
+	 * 锟斤拷锟斤拷应锟斤拷转锟斤拷为锟街凤拷
 	 * @param stream
 	 * @param charset
 	 * @return
@@ -220,7 +180,7 @@ public abstract class WebUtils {
 		for (Entry<String, String> entry : entries) {
 			String name = entry.getKey();
 			String value = entry.getValue();
-			// 忽略参数名或参数值为空的参数
+			// 锟斤拷锟皆诧拷锟斤拷锟斤拷锟斤拷锟斤拷值为锟秸的诧拷锟斤拷
 			if (name!=null&&value!=null) {
 				if (hasParam) {
 					query.append("&");

@@ -1,13 +1,13 @@
 package com.mc.domain;
 /**
- * QQ分组信息
+ * QQ濂藉弸鍒嗙粍淇℃伅
  * @author Shine_MuShi
  *
  */
 public class Group {
-	private String groupUrl;	//分组链接
-	private String groupName;	//分组名称
-	private Integer groupIndex;//分组索引
+	private String groupUrl;	//QQ鍒嗙粍URL
+	private String groupName;	//QQ鍒嗙粍鍚嶇О
+	private Integer groupIndex;//QQ鍒嗙粍搴忓彿
 
 	public String getGroupUrl() {
 		return groupUrl;

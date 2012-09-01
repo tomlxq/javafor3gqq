@@ -4,13 +4,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Êı¾İ¿âÁ¬½ÓÀà
  * @author Shine_MuShi
  *
  */
 public class DBConn {
 	/**
-	 * ´´½¨MysqlÊı¾İ¿âÁ¬½Ó
+	 * è·å–æ•°æ®åº“è®¿é—®è¿æ¥
 	 * @return
 	 */
 	public Connection getMySQLConnection(){
@@ -25,7 +24,7 @@ public class DBConn {
 		return conn;
 	}
 	/**
-	 * ¹Ø±ÕÊı¾İ¿âÁ¬½Ó
+	 * å…³é—­æ•°æ®åº“è¿æ¥
 	 */
 	public void close(Connection conn){
 		try {

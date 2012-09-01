@@ -1,4 +1,4 @@
-package com.mc.test;
+package com.mc.client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,24 +13,24 @@ import com.mc.domain.Group;
 import com.mc.thread.GroupRunnable;
 
 /**
- * QQÀà¡£µÇÂ½¡¢ÊÕ·¢ĞÅÏ¢£¬¸üĞÂĞÄÇéµÈµÈ¡£
+ * QQï¿½à¡£ï¿½ï¿½Â½ï¿½ï¿½ï¿½Õ·ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÈ¡ï¿½
  * @author Shine_MuShi
  */
 public class QQClient {
-	//3GQQµÄµÇÂ½action
+	//3GQQï¿½Äµï¿½Â½action
 	private static final String QQ_LOGIN_URL="http://pt.3g.qq.com/handleLogin";
-	//QQ¿Õ¼äµÄÁôÑÔaction
+	//QQï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½action
 	private static String QQ_ADD_MSG_URL="http://blog60.z.qq.com/mmsgb/add_msg_action_switch.jsp?B_UID=";
-	//·¢±íQQ¿Õ¼äËµËµ
+	//ï¿½ï¿½ï¿½ï¿½QQï¿½Õ¼ï¿½ËµËµ
 	private static String QQ_SAY_URL="http://blog60.z.qq.com/mood/mood_add_exe.jsp?sid=";
 	static List<String> all=new ArrayList<String>();
 	static	String[] msg=
 		{
-			"ÕäÏ§ÈËÉúÖĞµÄÃ¿Ò»´ÎÏàÊ¶£»ÌìµØ¼äµÄÃ¿Ò»·İÎÂÅ¯£»ÅóÓÑ¼äµÄÃ¿Ò»¸öÖªĞÄÄ¬Æõ£»ÎŞÂÛÄãÔÚºÎ·½£¬Õâ¸öÊÀ½ç½«ÎŞ·¨¸Ä±ä¼ÇÒä£¡ÈËÉúµÄÂ·ÒòÓĞÅóÓÑ¶ø²»¹Âµ¥,ÎÒµÄ¿Õ¼äÒòÄãµÄµ½À´¶ø¾«²Ê£¡ÊÇÍøÂçÈÃÎÒÃÇÏà¾Û½»Á÷£¬ÊÇÅóÓÑÃÇµÄÎÊºòÈÃÎÒ¸Ğ¶¯£¡ÓÀÔ¶×£¸£ÎÒµÄºÃÅóÓÑ,ĞÒ¸£¿ìÀÖ! ",
-			"ÉúÃüÂÃÍ¾ÖĞ£¬ ÎÒ¸Ğ¶¯Ã¿Ò»´ÎÔµµÄÀ´ÁÙ£¬ Ò»¸ö¼ò¶ÌµÄÎÊºòĞÅÏ¢£¬ Ò»¶ÎÇ×ÇĞµÄÁôÑÔ½»Ì¸£¬ ¶¼Èç´ËÈÃÎÒ¸Ğ¶¯£¬ ¸Ğ¿®ÔµµÄÃÀÀö£¬ ¸Ğ¶¯ÓÑÒêµÄÎÂÜ°£¡¸øÄãÒ»¸öÇáÇáµÄ×£¸££¡Ö»Ô¸ºÃÅóÓÑÃ¿·ÖÃ¿Ãë¶¼¿ìÀÖ£¡½¡¿µ¡¢ºÃÔËºÍĞÒ¸££¡ ",
-			"µ­µ­µØÇ£¹Ò¡¢Ä¬Ä¬µØ¹Ø×¢¡¢Ò£Ò£µÄ×£¸££¬¼´Ê¹Ò»ÇĞÊÇ¶ÌÔİµÄ£¬Ò²½«¶¨¸ñ³ÉÎÒÃÇÓÀºãµÄ»ØÒä£¬³ÉÎªÎÒÃÇÒ»ÉúÖĞ×îÃÀÀöµÄ·ç¾°¡£×£ÅóÓÑÍòÊÂÈçÒâ£¬ĞÒ¸£°²¿µ£¡ ",
-			"ÄãÒ²»á°®ÉÏÒ»¸öÈË¸¶³öºÜ¶àºÜ¶à,ÄãÒ²»áÊØ×ÅÃØÃÜ²»¿Ï¸æËßÎÒ,¡¡ÔÚÒ»¸öÒ¹ÍíÙË×ÅÎÒµÄ¼ç,ÀáË®Ö¹²»×¡µØÁ÷ÁËÒ»ÕûÒ¹",
-			"ºÍÄãÒ»ÑùÎÒÒ²²»¶®Î´À´»¹ÓĞÊ²Ã´,ÎÒºÃÏëÌæÄã×èµ²·çÓêºÍÃÔ»ó,ÈÃÄãµÄÌì¿ÕÖ»¿´¼û²Êºç,Ö±µ½ÓĞÒ»ÌìÄãÒ²±ä³ÉÁËÎÒ",
+			"ï¿½ï¿½Ï§ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½Å¯ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¼ï¿½ï¿½Ã¿Ò»ï¿½ï¿½Öªï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÚºÎ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç½«ï¿½Ş·ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ä£¡ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½Âµï¿½,ï¿½ÒµÄ¿Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½Êºï¿½ï¿½ï¿½ï¿½Ò¸Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶×£ï¿½ï¿½ï¿½ÒµÄºï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ò¸ï¿½ï¿½ï¿½ï¿½ï¿½! ",
+			"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½Ğ£ï¿½ ï¿½Ò¸Ğ¶ï¿½Ã¿Ò»ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½Ù£ï¿½ Ò»ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½Êºï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½Ô½ï¿½Ì¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¸Ğ¶ï¿½ï¿½ï¿½ ï¿½Ğ¿ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½Ö»Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ã¿ï¿½ë¶¼ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½Ò¸ï¿½ï¿½ï¿½ ",
+			"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½Ò¡ï¿½Ä¬Ä¬ï¿½Ø¹ï¿½×¢ï¿½ï¿½Ò£Ò£ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹Ò»ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½İµÄ£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ä£¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ç¾°ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½Ò¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ",
+			"ï¿½ï¿½Ò²ï¿½á°®ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½ï¿½Ü¶ï¿½Ü¶ï¿½,ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü²ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ¼ï¿½,ï¿½ï¿½Ë®Ö¹ï¿½ï¿½×¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò¹",
+			"ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê²Ã´,ï¿½Òºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½èµ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Êºï¿½,Ö±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
 		}; 
 	private static String SID=null;
 	static Random random=new Random();
@@ -39,13 +39,13 @@ public class QQClient {
 	}
 	
 	/**
-	 * QQµÇÂ½
+	 * QQï¿½ï¿½Â½
 	 */
 	public static String login(String qq,String password){
 		HashMap<String, String> params=new HashMap<String, String>();
 		params.put("login_url", "http://pt.3g.qq.com/s?aid=nLogin");
 		params.put("sidtype", "1");
-		params.put("loginTitle", "ÊÖ»úÌÚÑ¶Íø");
+		params.put("loginTitle", "ï¿½Ö»ï¿½ï¿½ï¿½Ñ¶ï¿½ï¿½");
 		params.put("bid", "0");
 		params.put("qq", qq);
 		params.put("pwd", password);
@@ -61,7 +61,7 @@ public class QQClient {
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞ·Ö×éĞÅÏ¢
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public static List<Group> getFrendGroup(String sid){
 		List<Group> groupList=null;
@@ -87,7 +87,7 @@ public class QQClient {
 	}
 	
 	/**
-	 * ¸ù¾İ·Ö×é»ñÈ¡ºÃÓÑĞÅÏ¢
+	 * ï¿½ï¿½İ·ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public static void getFrindByGourp(List<Group> groupList){
 		
@@ -102,7 +102,7 @@ public class QQClient {
 	}
 	
 	/**
-	 * ¸ù¾İ·Ö×éµÄURL»ñÈ¡ºÃÓÑĞÅÏ¢
+	 * ï¿½ï¿½İ·ï¿½ï¿½ï¿½ï¿½URLï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public static String getFrindsByGroupUrl(String groupUrl){
 		String response=null;
@@ -115,21 +115,21 @@ public class QQClient {
 	}
 	
 	/**
-	 * Í³¼ÆºÃÓÑĞÅÏ¢
+	 * Í³ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public static synchronized void mergeFrind(List<String> friendList){
 		all.addAll(friendList);
 	}
 	
 	/**
-	 * ·¢ËÍÏûÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public static void sendMsg(String toQQ,String msg,String sid){
 		
 	}
 	
 	/**
-	 * »ñÈ¡ÏûÏ¢
+	 * ï¿½ï¿½È¡ï¿½ï¿½Ï¢
 	 */
 	public static String getMsg(String qqNum,String sid){
 		String msg=null;
@@ -140,7 +140,7 @@ public class QQClient {
 			if(response.indexOf("main-module bm-blue")!=-1){
 				Matcher matcher=pattern.matcher(response);
 				while(matcher.find()){
-					System.out.print(new Date()+matcher.group()+"·¢ÏûÏ¢À´ÁË£º");
+					System.out.print(new Date()+matcher.group()+"ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ë£ï¿½");
 					pattern = Pattern.compile("(?<=<p>).+?(?=</p>)");
 					Matcher matcher2=pattern.matcher(response);
 					while(matcher2.find()){
@@ -154,14 +154,14 @@ public class QQClient {
 		return msg;
 	}
 	/**
-	 * ÊÇ·ñÓĞĞÂÏûÏ¢
+	 * ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	public boolean hasNewMsg(String qqNum,String sid){
 		return false;
 	}
 
 	/**
-	 * ¸ù¾İºÃÓÑ·Ö×éµÄÁĞ±íĞÅÏ¢»ñÈ¡ËùÓĞĞÅÏ¢
+	 * ï¿½ï¿½İºï¿½ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @param groupInfoList
 	 * @return
 	 */
@@ -183,7 +183,7 @@ public class QQClient {
 				do{
 					pid=pid+1;
 					response=QQClient.getFrindsByGroupUrl(getGroupUrl(group.getGroupUrl(),pid));
-					hasNext=response.indexOf("ÏÂÒ³");
+					hasNext=response.indexOf("ï¿½ï¿½Ò³");
 					matcher=pattern.matcher(response);
 					while(matcher.find()){
 						String firendQQ=matcher.group();
@@ -197,7 +197,7 @@ public class QQClient {
 	
 	
 	/**
-	 * È¡Ö¸¶¨Ò³ÊıµÄºÃÓÑ
+	 * È¡Ö¸ï¿½ï¿½Ò³ï¿½ï¿½Äºï¿½ï¿½ï¿½
 	 * @param pid
 	 * @return
 	 */
@@ -206,7 +206,7 @@ public class QQClient {
 		return groupUrl;
 	}
 	/**
-	 * ×Ô¶¯ÅÜÌÃ Ë¢ÁôÑÔ
+	 * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ Ë¢ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static void goOtherHome(String sid){
 		HashMap<String, String> params=new HashMap<String, String>();
@@ -216,13 +216,13 @@ public class QQClient {
 		try {
 			String response=WebUtils.doPost(getFriendurl(sid), params, 0, 0);
 			if(response!=null){
-			if(response.contains("ÁôÑÔ³É¹¦")){
+			if(response.contains("ï¿½ï¿½ï¿½Ô³É¹ï¿½")){
 				System.out.println(getFriendurl(sid));
 			}else{
-				System.out.println("ÁôÑÔÊ§°Ü");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 			}
 			}else{
-				System.out.println("ÁôÑÔÊ§°Ü");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -234,7 +234,7 @@ public class QQClient {
 	}
 	
 	/**
-	 * ²úÉúËæ»úQQºÅ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½QQï¿½ï¿½
 	 */
 	static StringBuffer sb=new StringBuffer();
 	public static String getRandomQQ(){
@@ -247,13 +247,13 @@ public class QQClient {
 	}
 	
 	/**
-	 * ²úÉúËæ»úÁôÑÔÄÚÈİ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String getMsg(){
 		return msg[random.nextInt(msg.length)];
 	}
 	/**
-	 * ·¢±íÒ»ÌõËµËµ
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ËµËµ
 	 */
 	public static void say(String sid,String msg){
 		String url=QQ_SAY_URL+sid;
@@ -264,8 +264,8 @@ public class QQClient {
 		params.put("action","1");
 		try{
 			String response=WebUtils.doPost(url, params, 0, 0);
-			if(response.contains("·¢±í³É¹¦")){
-				System.out.println("·¢±í³É¹¦");
+			if(response.contains("ï¿½ï¿½ï¿½ï¿½É¹ï¿½")){
+				System.out.println("ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 			}else{
 				System.out.println(response);
 			}

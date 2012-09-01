@@ -2,12 +2,10 @@ package com.mc.test;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
 
-import com.mc.domain.Friend;
-import com.mc.domain.Group;
+import com.mc.client.QQClient;
+
 /**
- * 3GQQ测试的一个小Demo
  * @author Shine_MuShi
  */
 public class Test {
@@ -18,23 +16,14 @@ public class Test {
 	static HttpURLConnection conn=null;
 	static String rsp=null;
 	static OutputStream out = null;
-	/**
-	 * 首先登陆。
-	 * 然后获取分组信息。
-	 * 然后根据分组信息取所有好友QQ号。
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		try {
-		System.out.println("开始抓取。。");
-		long a=System.currentTimeMillis();
 		String sid=QQClient.login("", "");
 		//System.out.println(sid);
 //		List<Group> groupInfoList=QQClient.getFrendGroup(sid);
 		//	QQClient.getFrindByGourp(groupInfoList);
 //		List<String> firendList=QQClient.getFriendsFromGroup(groupInfoList);
-//		long b=System.currentTimeMillis();
-//		System.out.println("抓取结束。。耗时"+(b-a)+" 好友数："+firendList.size());
 //		for(String qq:firendList){
 //			System.out.println(qq);
 //		}
