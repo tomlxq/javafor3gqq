@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 /**
- * 数据插入
+ * 鏁版嵁搴撴搷浣滅被
  * @author Shine_MuShi
  *
  */
@@ -17,6 +17,14 @@ public class BaseDao {
 		db=new DBConn();
 	}
 	
+	/**
+	 * 淇濆瓨缁撴灉
+	 * @param fqq
+	 * @param msg
+	 * @param date
+	 * @param result
+	 * @return
+	 */
 	public boolean saveResult(String fqq,String msg,Date date,String result){
 		Connection conn=db.getMySQLConnection();
 		try {
@@ -26,7 +34,7 @@ public class BaseDao {
 			ps.setString(3, date.toString());
 			ps.setString(1, result);
 			int a=ps.executeUpdate();
-			System.out.println(a);
+			return a>0?false:true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,16 +1,16 @@
 package com.mc.domain;
 /**
- * ºÃÓÑĞÅÏ¢
+ * QQå¥½å‹ä¿¡æ¯ç»“æ„
  * @author Shine_MuShi
  *
  */
 public class Friend {
 	/**
-	 * QQºÅ
+	 * å¥½å‹QQå·
 	 */
 	private String qq;
 	/**
-	 * êÇ³Æ
+	 * å¥½å‹æ˜µç§°
 	 */
 	private String nick;
 	

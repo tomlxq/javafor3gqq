@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.mc.client.QQClient;
 import com.mc.domain.Group;
-import com.mc.test.QQClient;
 
 /**
- * ¸ù¾Ý·Ö×éµÄlistÈ¥»ñÈ¡Ã¿¸ö·Ö×éµÄºÃÓÑ
  * @author Shine_MuShi
  *
  */
@@ -25,9 +24,9 @@ public class GroupRunnable implements Runnable{
 	public void run() {
 			String response=QQClient.getFrindsByGroupUrl(group.getGroupUrl());
 			List<String> list=new ArrayList<String>();
-			//È¡ËùÓÐµÄºÃÓÑÁ¬½Ó
+			//È¡ï¿½ï¿½ï¿½ÐµÄºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			//Pattern pattern = Pattern.compile("(?<=a href=\").+?(?=\"><img src)");
-			//È¡ËùÓÐµÄºÃÓÑÐÅÏ¢
+			//È¡ï¿½ï¿½ï¿½ÐµÄºï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 			Pattern pattern = Pattern.compile("(?<=&amp;u=).+?(?=&amp)");
 			Matcher matcher=null;
 			int hasNext=-1;
@@ -36,19 +35,18 @@ public class GroupRunnable implements Runnable{
 				pid=pid+1;
 				response=QQClient.getFrindsByGroupUrl(getGroupUrl(pid));
 				//hasNext=response.indexOf("page-nav bg tp-white");
-				hasNext=response.indexOf("ÏÂÒ³");
+				hasNext=response.indexOf("ï¿½ï¿½Ò³");
 				matcher=pattern.matcher(response);
 				while(matcher.find()){
 					String firendQQ=matcher.group();
 					list.add(firendQQ);
-				//	System.out.println(firendQQ);
 				}	
 			}while(hasNext!=-1);
 			QQClient.mergeFrind(list);
 	}
 	
 	/**
-	 * È¡Ö¸¶¨Ò³ÊýµÄºÃÓÑ
+	 * È¡Ö¸ï¿½ï¿½Ò³ï¿½ï¿½Äºï¿½ï¿½ï¿½
 	 * @param pid
 	 * @return
 	 */
