@@ -32,6 +32,7 @@ public abstract class WebUtils {
 	}
 	
 	/**
+	 * 执行POST提交
 	 * @parmaַ
 	 * @param params
 	 * @return
@@ -39,13 +40,23 @@ public abstract class WebUtils {
 	 */
 	public static String doPost(String url, Map<String, String> params,int connectTimeout,int readTimeout) throws IOException {
 		String query=buildQuery(params, DEFAULT_CHARSET);
-		byte[] content={};
+		byte[] content=null;
 		if(query!=null){
 			content=query.getBytes(DEFAULT_CHARSET);
 		}
 		return doPost(url, CTYPE, content, connectTimeout, readTimeout);
 	}
-
+	
+	/**
+	 * 执行POST提交
+	 * @param url
+	 * @param ctype
+	 * @param content
+	 * @param connectTimeout
+	 * @param readTimeout
+	 * @return
+	 * @throws IOException
+	 */
 	public static String doPost(String url, String ctype, byte[] content,int connectTimeout,int readTimeout) throws IOException {
 		HttpURLConnection conn = null;
 		OutputStream out = null;
@@ -55,17 +66,12 @@ public abstract class WebUtils {
 				conn = getConnection(new URL(url), METHOD_POST, ctype);	
 				conn.setConnectTimeout(connectTimeout);
 				conn.setReadTimeout(readTimeout);
-			}catch(IOException e){
-				throw e;
-			}
-			try{
 				out = conn.getOutputStream();
 				out.write(content);
 				rsp = getResponseAsString(conn);
 			}catch(IOException e){
 				throw e;
 			}
-			
 		}finally {
 			if (out != null) {
 				out.close();
@@ -77,6 +83,12 @@ public abstract class WebUtils {
 		return rsp;
 	}
 	
+	/**
+	 * 执行GET提交
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
 	public static String doGet(String url) throws IOException {
 		return doGet(url, DEFAULT_CHARSET);
 	}
@@ -88,10 +100,6 @@ public abstract class WebUtils {
 		try {
 			try{
 				conn = getConnection(new URL(url), METHOD_GET, CTYPE);
-			}catch(IOException e){
-				throw e;
-			}
-			try{
 				rsp = getResponseAsString(conn);
 			}catch(IOException e){
 				throw e;
@@ -104,6 +112,14 @@ public abstract class WebUtils {
 		return rsp;
 	}
 	
+	/**
+	 * 获取URL连接
+	 * @param url
+	 * @param action
+	 * @param ctype
+	 * @return
+	 * @throws IOException
+	 */
 	private static HttpURLConnection getConnection(URL url, String action, String ctype)
 			throws IOException {
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -116,6 +132,12 @@ public abstract class WebUtils {
 		return conn;
 	}
 	
+	/**
+	 * 响应流转为String
+	 * @param conn
+	 * @return
+	 * @throws IOException
+	 */
 	private static String getResponseAsString(HttpURLConnection conn) throws IOException {
 		String charset = getResponseCharset(conn.getContentType());
 		InputStream es = conn.getErrorStream();
@@ -126,7 +148,7 @@ public abstract class WebUtils {
 	}
 	
 	/**
-	 * ����Ӧ��ת��Ϊ�ַ�
+	 * 从流获取字符串
 	 * @param stream
 	 * @param charset
 	 * @return
@@ -149,6 +171,11 @@ public abstract class WebUtils {
 		}
 	}
 
+	/**
+	 * 获取响应的字符编码
+	 * @param ctype
+	 * @return
+	 */
 	private static String getResponseCharset(String ctype) {
 		String charset = DEFAULT_CHARSET;
 		if (ctype!=null) {
@@ -169,31 +196,33 @@ public abstract class WebUtils {
 		return charset;
 	}
 	
+	/**
+	 * 绑定参数
+	 * @param params
+	 * @param charset
+	 * @return
+	 * @throws IOException
+	 */
 	public static String buildQuery(Map<String, String> params, String charset) throws IOException {
 		if (params == null || params.isEmpty()) {
 			return null;
 		}
-
 		StringBuilder query = new StringBuilder();
 		Set<Entry<String, String>> entries = params.entrySet();
 		boolean hasParam = false;
 		for (Entry<String, String> entry : entries) {
 			String name = entry.getKey();
 			String value = entry.getValue();
-			// ���Բ���������ֵΪ�յĲ���
 			if (name!=null&&value!=null) {
 				if (hasParam) {
 					query.append("&");
 				} else {
 					hasParam = true;
 				}
-
 				query.append(name).append("=").append(URLEncoder.encode(value, charset));
 			}
 		}
-
 		return query.toString();
 	}
-
 
 }
