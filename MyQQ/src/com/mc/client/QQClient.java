@@ -10,27 +10,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.mc.domain.Group;
-import com.mc.thread.GroupRunnable;
 
 /**
- * QQ�ࡣ��½���շ���Ϣ����������ȵȡ�
+ * QQ客户端。
+ *	包括3GQQ登陆、发送消息，获取好友信息等等。
  * @author Shine_MuShi
  */
 public class QQClient {
-	//3GQQ�ĵ�½action
+	//3GQQ登陆地址
 	private static final String QQ_LOGIN_URL="http://pt.3g.qq.com/handleLogin";
-	//QQ�ռ������action
+	//QQ空间发表说说action
 	private static String QQ_ADD_MSG_URL="http://blog60.z.qq.com/mmsgb/add_msg_action_switch.jsp?B_UID=";
-	//����QQ�ռ�˵˵
+	//QQ空间留言板
 	private static String QQ_SAY_URL="http://blog60.z.qq.com/mood/mood_add_exe.jsp?sid=";
 	static List<String> all=new ArrayList<String>();
-	static	String[] msg=
+	final static String[] msg=
 		{
-			"��ϧ�����е�ÿһ����ʶ����ؼ��ÿһ����ů�����Ѽ��ÿһ��֪��Ĭ�����������ںη���������罫�޷��ı���䣡�����·�������Ѷ�µ�,�ҵĿռ�����ĵ�����ʣ���������������۽������������ǵ��ʺ����Ҹж�����Զף���ҵĺ�����,�Ҹ�����! ",
-			"������;�У� �Ҹж�ÿһ��Ե�����٣� һ����̵��ʺ���Ϣ�� һ�����е����Խ�̸�� ��������Ҹж��� �п�Ե�������� �ж��������ܰ������һ�������ף����ֻԸ������ÿ��ÿ�붼���֣����������˺��Ҹ��� ",
-			"������ǣ�ҡ�ĬĬ�ع�ע��ңң��ף������ʹһ���Ƕ��ݵģ�Ҳ���������������Ļ��䣬��Ϊ����һ�����������ķ羰��ף�����������⣬�Ҹ������� ",
-			"��Ҳ�ᰮ��һ���˸����ܶ�ܶ�,��Ҳ���������ܲ��ϸ�����,����һ��ҹ�������ҵļ�,��ˮֹ��ס������һ��ҹ",
-			"����һ����Ҳ����δ������ʲô,�Һ��������赲������Ի�,��������ֻ����ʺ�,ֱ����һ����Ҳ�������",
+			"留言内容1",
+			"留言内容2",
+			"留言内容3",
 		}; 
 	private static String SID=null;
 	static Random random=new Random();
@@ -39,13 +37,13 @@ public class QQClient {
 	}
 	
 	/**
-	 * QQ��½
+	 * QQ登陆
 	 */
-	public static String login(String qq,String password){
+	public static String login(final String qq,final String password){
 		HashMap<String, String> params=new HashMap<String, String>();
 		params.put("login_url", "http://pt.3g.qq.com/s?aid=nLogin");
 		params.put("sidtype", "1");
-		params.put("loginTitle", "�ֻ���Ѷ��");
+		params.put("loginTitle", "手机腾讯网");
 		params.put("bid", "0");
 		params.put("qq", qq);
 		params.put("pwd", password);
@@ -61,7 +59,7 @@ public class QQClient {
 	}
 	
 	/**
-	 * ��ȡ���з�����Ϣ
+	 * 获取分组信息
 	 */
 	public static List<Group> getFrendGroup(String sid){
 		List<Group> groupList=null;
@@ -87,22 +85,17 @@ public class QQClient {
 	}
 	
 	/**
-	 * ��ݷ����ȡ������Ϣ
+	 * 根据分组地址获取好友信息
 	 */
 	public static void getFrindByGourp(List<Group> groupList){
 		
 		if(groupList!=null&&groupList.size()!=0){
-			for(Group group:groupList){
-				GroupRunnable r=new GroupRunnable(group);
-				Thread t=new Thread(r);
-				t.start();
-			}
 		
 		}
 	}
 	
 	/**
-	 * ��ݷ����URL��ȡ������Ϣ
+	 *  根据分组地址获取好友信息
 	 */
 	public static String getFrindsByGroupUrl(String groupUrl){
 		String response=null;
@@ -115,21 +108,21 @@ public class QQClient {
 	}
 	
 	/**
-	 * ͳ�ƺ�����Ϣ
+	 * 合并好友信息
 	 */
 	public static synchronized void mergeFrind(List<String> friendList){
 		all.addAll(friendList);
 	}
 	
 	/**
-	 * ������Ϣ
+	 * 发送消息
 	 */
 	public static void sendMsg(String toQQ,String msg,String sid){
 		
 	}
 	
 	/**
-	 * ��ȡ��Ϣ
+	 * 获取消息
 	 */
 	public static String getMsg(String qqNum,String sid){
 		String msg=null;
@@ -154,14 +147,13 @@ public class QQClient {
 		return msg;
 	}
 	/**
-	 * �Ƿ�������Ϣ
 	 */
 	public boolean hasNewMsg(String qqNum,String sid){
 		return false;
 	}
 
 	/**
-	 * ��ݺ��ѷ�����б���Ϣ��ȡ������Ϣ
+	 * 从分组列表获取好友信息
 	 * @param groupInfoList
 	 * @return
 	 */
@@ -183,7 +175,7 @@ public class QQClient {
 				do{
 					pid=pid+1;
 					response=QQClient.getFrindsByGroupUrl(getGroupUrl(group.getGroupUrl(),pid));
-					hasNext=response.indexOf("��ҳ");
+					hasNext=response.indexOf("下页");
 					matcher=pattern.matcher(response);
 					while(matcher.find()){
 						String firendQQ=matcher.group();
@@ -197,7 +189,7 @@ public class QQClient {
 	
 	
 	/**
-	 * ȡָ��ҳ��ĺ���
+	 * 获取分组
 	 * @param pid
 	 * @return
 	 */
@@ -206,7 +198,7 @@ public class QQClient {
 		return groupUrl;
 	}
 	/**
-	 * �Զ����� ˢ����
+	 * 随机刷留言
 	 */
 	public static void goOtherHome(String sid){
 		HashMap<String, String> params=new HashMap<String, String>();
@@ -216,13 +208,13 @@ public class QQClient {
 		try {
 			String response=WebUtils.doPost(getFriendurl(sid), params, 0, 0);
 			if(response!=null){
-			if(response.contains("���Գɹ�")){
+			if(response.contains("留言成功")){
 				System.out.println(getFriendurl(sid));
 			}else{
-				System.out.println("����ʧ��");
+				System.out.println("OK");
 			}
 			}else{
-				System.out.println("����ʧ��");
+				System.out.println("failed");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -234,7 +226,6 @@ public class QQClient {
 	}
 	
 	/**
-	 * �������QQ��
 	 */
 	static StringBuffer sb=new StringBuffer();
 	public static String getRandomQQ(){
@@ -247,13 +238,13 @@ public class QQClient {
 	}
 	
 	/**
-	 * ���������������
 	 */
 	public static String getMsg(){
 		return msg[random.nextInt(msg.length)];
 	}
+	
 	/**
-	 * ����һ��˵˵
+	 * 发表QQ空间说说
 	 */
 	public static void say(String sid,String msg){
 		String url=QQ_SAY_URL+sid;
@@ -264,13 +255,32 @@ public class QQClient {
 		params.put("action","1");
 		try{
 			String response=WebUtils.doPost(url, params, 0, 0);
-			if(response.contains("����ɹ�")){
-				System.out.println("����ɹ�");
+			if(response.contains("发布成功")){
+				System.out.println("OK");
 			}else{
 				System.out.println(response);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+	}
+	/**
+	 * 删除留言版本
+	 */
+	public static void deleteByIdS(){
+		//http://blog60.z.qq.com/mmsgb/del_msg.jsp?msgId=2220&archive=0&B_UID=418537487&sid=AQp9yLbfFWEhjMknzn8-f4TD&opageNo=3
+		//	http://blog30.z.qq.com/mmsgb/del_msg.jsp?msgId=1618&archive=0&B_UID=418537487&sid=AQp9yLbfFWEhjMknzn8-f4TD&opageNo=63
+		try{	
+		for(int i=1618;i<2220;i++){
+				HashMap<String, String> params=new HashMap<String, String>();
+				params.put("B_UID","418537487");
+				params.put("msgId",String.valueOf(i));
+				params.put("archive","0");
+				params.put("action","1");
+				WebUtils.doPost("http://blog60.z.qq.com/mmsgb/del_msg.jsp?sid=", params, 0, 0);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
 	}
 }
