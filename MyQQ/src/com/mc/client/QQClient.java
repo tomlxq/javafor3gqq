@@ -23,6 +23,9 @@ public class QQClient {
 	private static String QQ_ADD_MSG_URL="http://blog60.z.qq.com/mmsgb/add_msg_action_switch.jsp?B_UID=";
 	//QQ空间留言板
 	private static String QQ_SAY_URL="http://blog60.z.qq.com/mood/mood_add_exe.jsp?sid=";
+	//QQ日志评论
+	private static String QQ_RIZHI_PINGLUN="http://blog30.z.qq.com/blog/add_comment.jsp?sid=";
+	
 	static List<String> all=new ArrayList<String>();
 	final static String[] msg=
 		{
@@ -282,5 +285,72 @@ public class QQClient {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
+	}
+	
+	/**
+	 * @author qiqi
+	 * 获取日志列表的第一篇
+	 * @param sid  
+	 * @param qqNumber  获取该QQ的日志列表
+	 * @return
+	 */
+	public static String getRizhiList(String sid,String qqNumber){
+		
+		String list=null;
+		String url="http://blog60.z.qq.com/blog/blog_list.jsp?B_UID="+qqNumber+"&sid="+sid;
+		try {
+			String response=WebUtils.doGet(url);
+		  
+			Pattern pattern = Pattern.compile("(?<=bId).+?(?=&amp)");
+			Matcher matcher=pattern.matcher(response);
+			
+			while(matcher.find()){
+				String s=matcher.group();
+				int t=s.indexOf("=");
+				list=s.substring(t+1);
+				break;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * @author qiqi
+	 * QQ日志评论
+	 * @param bid
+	 * @param sid
+	 * @param qqNumber
+	 */
+	public static String pingLunRizhi(String bid,String sid,String qqNumber){
+		
+		String isSuccess="N";
+		String url= QQ_RIZHI_PINGLUN+sid;
+		HashMap<String, String> params=new HashMap<String, String>();
+ 
+		
+		params.put("bId", bid);
+		params.put("B_UID",qqNumber);
+		params.put("content","写的好啊，支持一下~");
+		
+		try {
+			String response=WebUtils.doPost(url, params, 0, 0);
+			 
+			if(response.contains("发表评论成功")){
+				System.out.println("VVV发表评论成功VVV");
+				isSuccess="Y";
+			}else{
+				System.out.println("发表评论失败");
+				isSuccess="N";
+				//System.out.println(response);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }
