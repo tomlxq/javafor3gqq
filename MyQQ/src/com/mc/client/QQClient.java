@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,8 +14,6 @@ import com.mc.domain.Group;
 
 /**
  * QQ客户端。
- *	包括3GQQ登陆、发送消息，获取好友信息等等。
- * @author Shine_MuShi
  */
 public class QQClient {
 	//3GQQ登陆地址
@@ -25,7 +24,6 @@ public class QQClient {
 	private static String QQ_SAY_URL="http://blog60.z.qq.com/mood/mood_add_exe.jsp?sid=";
 	//QQ日志评论
 	private static String QQ_RIZHI_PINGLUN="http://blog30.z.qq.com/blog/add_comment.jsp?sid=";
-	
 	static List<String> all=new ArrayList<String>();
 	final static String[] msg=
 		{
